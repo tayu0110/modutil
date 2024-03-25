@@ -1,0 +1,21 @@
+[package]
+name = "modutil"
+version = "0.1.0"
+edition = "2021"
+license = "CC0-1.0"
+license-file = "./LICENSE"
+authors = ["tayu0110"]
+repository = "https://github.com/tayu0110/modutil.git"
+description = "Provide the methods supports modular arithmetic."
+keywords = ["math", "modular", "arithmetic", "competitive"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+[dev-dependencies]
+criterion = "0.5.1"
+
+[[bench]]
+name = "pow_mod"
+harness = false
