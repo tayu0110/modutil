@@ -54,6 +54,14 @@ macro_rules! impl_primitive_montgomery {
             /// Convert a normal integer representation to Montgomery representation.
             ///
             /// To restore, you can use `Montgomery::reduce`.
+            ///
+            /// # Examples
+            /// ```rust
+            /// use modutil::Montgomery;
+            ///
+            /// const M: Montgomery<u8> = Montgomery::<u8>::new(17);
+            /// assert_eq!(M.reduce(M.convert(3)), 3);
+            /// ```
             pub const fn convert(&self, val: $t) -> $t {
                 self.multiply(val, self.r2)
             }

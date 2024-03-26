@@ -150,30 +150,30 @@ pub const fn crt(p: u64, m: u64, q: u64, n: u64) -> Option<u64> {
     }
 
     let w = q - p;
-    let (mut s, mut ys) = (n, 0u64);
-    let (mut t, mut yt) = (m, 1u64);
-    while s % t != 0 {
-        let tmp = s / t;
+    let (mut s, mut sy) = (n, 0u64);
+    let (mut t, mut ty) = (m, 1u64);
+    while t != 0 {
+        let d = s / t;
         let u = s % t;
 
-        let (v, f) = yt.overflowing_mul(tmp);
-        let yu = if f || v >= n {
-            ys.wrapping_add(yt.wrapping_neg().wrapping_mul(tmp))
+        let (v, f) = ty.overflowing_mul(d);
+        let uy = if f || v >= n {
+            sy.wrapping_add(ty.wrapping_neg().wrapping_mul(d))
         } else {
-            ys.wrapping_sub(v)
+            sy.wrapping_sub(v)
         };
 
-        (s, ys, t, yt) = (t, yt, u, yu);
+        (s, sy, t, ty) = (t, ty, u, uy);
     }
 
-    if yt > n {
-        yt = yt.wrapping_add(n);
+    if sy > n {
+        sy = sy.wrapping_add(n);
     }
 
-    if w % t == 0 {
-        let g = w / t;
-        let lcm = m / t * n;
-        let h = (g * yt) % (n / t);
+    if w % s == 0 {
+        let g = w / s;
+        let lcm = m / s * n;
+        let h = (g * sy) % (n / s);
         let res = (p + m * h) % lcm;
         debug_assert!(res % m == p);
         debug_assert!(res % n == q);
